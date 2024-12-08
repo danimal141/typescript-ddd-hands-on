@@ -1,0 +1,17 @@
+@startuml BookAggregation
+' + パブリック（public）
+' - プライベート（private）
+' # プロテクテッド（protected）
+' ~ パッケージ（package）
+class "BookId" as BookId {
+    + value: string
+}
+
+note bottom of BookId
+    ISBNコードを適用する。
+    ISBNコードは、ISBNのあとに数字で「978」、
+    さらにグループ（国・地域）番号（日本は4）、出版社番号、書名番号、の合計12桁の数字を並べ、
+    最後にこの12桁の数字を特定の計算式で演算して得た1桁のチェック用の数を付け加えたコード。
+end note
+
+@enduml
