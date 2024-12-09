@@ -1,4 +1,4 @@
-import { ValueObject } from "StockManagement/Domain/models/shared/ValueObject";
+import { ValueObject } from "Domain/models/shared/ValueObject";
 import { nanoid } from 'nanoid';
 
 type StockIdValue = string;
