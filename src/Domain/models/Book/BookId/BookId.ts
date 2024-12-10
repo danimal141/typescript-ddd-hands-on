@@ -1,7 +1,7 @@
-import { ValueObject } from '../../shared/ValueObject';
+import { ValueObject } from "../../shared/ValueObject";
 
 type BookIdValue = string;
-export class BookId extends ValueObject<BookIdValue, 'BookId'> {
+export class BookId extends ValueObject<BookIdValue, "BookId"> {
   static MAX_LENGTH = 13;
   static MIN_LENGTH = 10;
 
@@ -11,11 +11,11 @@ export class BookId extends ValueObject<BookIdValue, 'BookId'> {
 
   protected validate(isbn: BookIdValue): void {
     if (isbn.length < BookId.MIN_LENGTH || isbn.length > BookId.MAX_LENGTH) {
-      throw new Error('ISBNの文字数が不正です');
+      throw new Error("ISBNの文字数が不正です");
     }
 
     if (!this.isValidIsbn10(isbn) && !this.isValidIsbn13(isbn)) {
-      throw new Error('不正なISBNの形式です');
+      throw new Error("不正なISBNの形式です");
     }
   }
 
@@ -29,7 +29,7 @@ export class BookId extends ValueObject<BookIdValue, 'BookId'> {
   private isValidIsbn13(isbn13: string): boolean {
     // ISBN-13 のバリデーションロジックを実装
     // ここでは簡単な例を示しますが、実際にはより複雑なチェックが必要です
-    return isbn13.startsWith('978') && isbn13.length === 13;
+    return isbn13.startsWith("978") && isbn13.length === 13;
   }
 
   toISBN(): string {

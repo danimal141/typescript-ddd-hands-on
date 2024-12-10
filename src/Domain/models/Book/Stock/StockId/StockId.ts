@@ -1,8 +1,8 @@
 import { ValueObject } from "Domain/models/shared/ValueObject";
-import { nanoid } from 'nanoid';
+import { nanoid } from "nanoid";
 
 type StockIdValue = string;
-export class StockId extends ValueObject<StockIdValue, 'StockId'> {
+export class StockId extends ValueObject<StockIdValue, "StockId"> {
   static readonly MAX_LENGTH = 100;
   static readonly MIN_LENGTH = 1;
 

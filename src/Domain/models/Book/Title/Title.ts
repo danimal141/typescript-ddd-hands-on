@@ -1,7 +1,7 @@
 import { ValueObject } from "../../shared/ValueObject";
 
 type TitleValue = string;
-export class Title extends ValueObject<TitleValue, 'Title'> {
+export class Title extends ValueObject<TitleValue, "Title"> {
   static readonly MAX_LENGTH = 1000;
   static readonly MIN_LENGTH = 1;
 
