@@ -1,4 +1,3 @@
-import { PrismaClient } from "@prisma/client";
 import { PrismaBookRepository } from "./PrismaBookRepository";
 import { bookTestDataCreator } from "Infrastructure/shared/Book/bookTestDataCreator";
 import { Book } from "Domain/models/Book/Book";
@@ -8,8 +7,8 @@ import { Price } from "Domain/models/Book/Price/Price";
 import { QuantityAvailable } from "Domain/models/Book/Stock/QuantityAvailable/QuantityAvailable";
 import { Status, StatusEnum } from "Domain/models/Book/Stock/Status/Status";
 import { Stock } from "Domain/models/Book/Stock/Stock";
-
-const prisma = new PrismaClient();
+import { PrismaClientManager } from "../PrismaClientManager";
+import prisma from "../prismaClient";
 
 describe("PrismaBookRepository", () => {
   beforeEach(async () => {
@@ -18,7 +17,8 @@ describe("PrismaBookRepository", () => {
     await prisma.$disconnect();
   });
 
-  const repository = new PrismaBookRepository();
+  const clientManager = new PrismaClientManager();
+  const repository = new PrismaBookRepository(clientManager);
 
   test("saveした集約がfindで取得できる", async () => {
     const bookId = new BookId("9784167158057");

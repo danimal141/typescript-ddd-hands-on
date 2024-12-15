@@ -12,6 +12,9 @@ export default [
         ecmaVersion: "latest",
         sourceType: "module",
         project: "./tsconfig.json"
+      },
+      globals: {
+        console: true // consoleをグローバルとして定義
       }
     },
     plugins: {
@@ -28,7 +31,8 @@ export default [
         "args": "none" // メソッドパラメータの未使用チェックを無効化
       }],
       "@typescript-eslint/no-explicit-any": "warn",
-      "no-unused-vars": "off" // TypeScript側のルールを優先
+      "no-unused-vars": "off", // TypeScript側のルールを優先
+      "no-console": ["warn", { allow: ["log"] }] // console.logを許可、他のconsoleメソッドは警告
     }
   },
   {
