@@ -13,7 +13,9 @@
     "paths": {
       "*": ["./src/*"]
     },
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
   },
   "include": ["src/**/*.ts", "src/**/*.js"],
   "exclude": ["node_modules"]

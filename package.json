@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint src/**/*.ts",
-    "lint:fix": "eslint src/**/*.ts --fix"
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "start": "NODE_OPTIONS='--loader ts-node/esm' npx ts-node src/Presentation/Express/index.ts"
   },
   "author": "",
   "type": "module",
