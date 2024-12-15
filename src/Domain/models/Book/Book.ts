@@ -3,6 +3,9 @@ import { Price } from "./Price/Price";
 import { StatusEnum } from "./Stock/Status/Status";
 import { Stock } from "./Stock/Stock";
 import { Title } from "./Title/Title";
+// eslint test
+// error  Unexpected path "Infrastructure/Prisma/prismaClient" imported in restricted zone. Domain層でInfrastructure層をimportしてはいけません。  import/no-restricted-paths
+// import prisma from "Infrastructure/Prisma/prismaClient";
 
 //  Stock エンティティの値やメソッドへの参照がすべて Book ルートエンティティを介して行われている
 export class Book {

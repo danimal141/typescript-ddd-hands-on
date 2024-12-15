@@ -1,6 +1,7 @@
 import js from "@eslint/js";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
+import importPlugin from "eslint-plugin-import";
 
 export default [
   js.configs.recommended,
@@ -14,25 +15,68 @@ export default [
         project: "./tsconfig.json"
       },
       globals: {
-        console: true // consoleをグローバルとして定義
+        console: true
+      }
+    },
+    settings: {
+      "import/resolver": {
+        typescript: {
+          alwaysTryTypes: true,
+          project: "./tsconfig.json"
+        }
+      },
+      "import/parsers": {
+        "@typescript-eslint/parser": [".ts", ".tsx"]
       }
     },
     plugins: {
-      "@typescript-eslint": tsPlugin
+      "@typescript-eslint": tsPlugin,
+      "import": importPlugin
     },
     rules: {
       "semi": ["error", "always"],
       "quotes": ["error", "double"],
-      // 抽象メソッドのパラメータを無視するように設定
       "@typescript-eslint/no-unused-vars": ["error", {
         "argsIgnorePattern": "^_",
         "varsIgnorePattern": "^_",
         "ignoreRestSiblings": true,
-        "args": "none" // メソッドパラメータの未使用チェックを無効化
+        "args": "none"
       }],
       "@typescript-eslint/no-explicit-any": "warn",
-      "no-unused-vars": "off", // TypeScript側のルールを優先
-      "no-console": ["warn", { allow: ["log"] }] // console.logを許可、他のconsoleメソッドは警告
+      "no-unused-vars": "off",
+      "no-console": ["warn", { allow: ["log"] }],
+      "import/no-restricted-paths": [
+        "error",
+        {
+          "zones": [
+            {
+              "target": "./src/Domain/**/!(*.spec.ts|*.test.ts)",
+              "from": "./src/Application/**/*",
+              "message": "Domain層でApplication層をimportしてはいけません。"
+            },
+            {
+              "target": "./src/Domain/**/!(*.spec.ts|*.test.ts)",
+              "from": "./src/Presentation/**/*",
+              "message": "Domain層でPresentation層をimportしてはいけません。"
+            },
+            {
+              "target": "./src/Domain/**/!(*.spec.ts|*.test.ts)",
+              "from": "./src/Infrastructure/**/*!(test).ts",
+              "message": "Domain層でInfrastructure層をimportしてはいけません。"
+            },
+            {
+              "target": "./src/Application/**/!(*.spec.ts|*.test.ts)",
+              "from": "./src/Presentation/**/*",
+              "message": "Application層でPresentation層をimportしてはいけません。"
+            },
+            {
+              "target": "./src/Application/**/!(*.spec.ts|*.test.ts)",
+              "from": "./src/Infrastructure/**/*",
+              "message": "Application層でInfrastructure層をimportしてはいけません。"
+            }
+          ]
+        }
+      ]
     }
   },
   {
